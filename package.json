@@ -2,7 +2,7 @@
   "name": "lipkart-server",
   "version": "1.0.0",
   "description": "Server side application for Flipkart Clone",
-  "main": "index.js",
+  "main": " ",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/app.js",
@@ -20,6 +20,8 @@
   "author": "Riyad Hossain",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.1"
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "mongoose": "^6.4.4"
   }
 }
