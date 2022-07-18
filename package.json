@@ -1,0 +1,25 @@
+{
+  "name": "lipkart-server",
+  "version": "1.0.0",
+  "description": "Server side application for Flipkart Clone",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/app.js",
+    "dev": "nodemon src/app.js"
+  },
+  "keywords": [
+    "server",
+    "node.js",
+    "express.js",
+    "mongodb",
+    "mongoose",
+    "backend",
+    "api"
+  ],
+  "author": "Riyad Hossain",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
