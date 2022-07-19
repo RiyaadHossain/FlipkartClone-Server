@@ -1,4 +1,5 @@
 // External Imports
+const bodyParser = require('body-parser');
 const express = require("express");
 const dotenv = require("dotenv");
 const app = express();
@@ -10,7 +11,7 @@ const userRoute = require("./routes/userRoute");
 dotenv.config();
 
 // Middlewares
-app.use(express.json());
+app.use(bodyParser.json());
 
 // Connect to DB
 require("./db/connect");
