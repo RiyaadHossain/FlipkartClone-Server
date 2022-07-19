@@ -11,27 +11,36 @@ exports.signup = (req, res) => {
       });
     }
 
-    const { firstName, lastName, email, userName, password } = req.body;
-
-    // Create New User
-    const newUser = new User({
-      firstName,
-      lastName,
-      email,
-      userName,
-      password,
-    });
-
-    newUser.save((err, data) => {
-      if (err)
+    // Check If the userName already exist or not
+    User.findOne({ userName: req.body.userName }).exec((err, user) => {
+      if (user) {
         return res.status(400).json({
-          message: "Something went wrong",
+          message: "Username Already Taken",
         });
+      }
 
-      if (data)
-        return res.status(201).json({
-          data,
-        });
+      const { firstName, lastName, email, userName, password } = req.body;
+
+      // Create New User
+      const newUser = new User({
+        firstName,
+        lastName,
+        email,
+        userName,
+        password,
+      });
+
+      newUser.save((err, data) => {
+        if (err)
+          return res.status(400).json({
+            message: "Something went wrong",
+          });
+
+        if (data)
+          return res.status(201).json({
+            data,
+          });
+      });
     });
   });
 };
