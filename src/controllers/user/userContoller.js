@@ -62,9 +62,19 @@ exports.signin = (req, res) => {
           expiresIn: "1h",
         });
 
-        return res
-          .status(200)
-          .json({ token, message: "User Login Successfully..!" });
+        const { _id, firstName, lastName, email, role, fullName, userName } = user;
+        return res.status(200).json({
+          token,
+          user: {
+            _id,
+            fullName,
+            firstName,
+            lastName,
+            userName,
+            email,
+            role
+          },
+        });
       } else {
         return res.status(400).json({ error: "Invalid Email or Password..!" });
       }

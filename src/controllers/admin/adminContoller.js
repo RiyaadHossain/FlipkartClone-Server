@@ -58,14 +58,24 @@ exports.signin = (req, res) => {
 
     if (user) {
       // Compare the password
-      if (user.authenticate(password, User.password)) {
+      if (user.authenticate(password, User.password) && user.role === "admin") {
         const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
           expiresIn: "1h",
         });
-
-        return res
-          .status(200)
-          .json({ token, message: "Admin Login Successfully..!" });
+        
+        const { _id, firstName, lastName, email, role, fullName, userName } = user;
+        return res.status(200).json({
+          token,
+          user: {
+            _id,
+            fullName, 
+            firstName,
+            lastName,
+            userName,
+            email,
+            role
+          },
+        });
       } else {
         return res.status(400).json({ error: "Invalid Email or Password..!" });
       }
