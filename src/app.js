@@ -5,7 +5,8 @@ const dotenv = require("dotenv");
 const app = express();
 
 // Internal Imports
-const userRoute = require("./routes/userRoute");
+const userRoute = require("./routes/user/userRoute");
+const adminRoute = require("./routes/admin/adminRoute");
 
 // Environment Variable
 dotenv.config();
@@ -22,7 +23,8 @@ app.get("/", (req, res) => {
 });
 
 // Routes
-app.use("/api", userRoute);
+app.use("/user", userRoute);
+app.use("/admin", adminRoute);
 
 // Listen to PORT
 app.listen(process.env.PORT, () => {
