@@ -1,8 +1,8 @@
+const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 
 // Sign Up Controller_____________________________________
 exports.signup = (req, res) => {
-  
   // Check If the email already exist or not
   User.findOne({ email: req.body.email }).exec((err, user) => {
     if (user) {
@@ -38,7 +38,7 @@ exports.signup = (req, res) => {
 
         if (data)
           return res.status(201).json({
-            data,
+            message: "User SignUp Successfully..!",
           });
       });
     });
@@ -46,4 +46,30 @@ exports.signup = (req, res) => {
 };
 
 // Sign In Controller_____________________________________
-exports.signin = (req, res) => {};
+exports.signin = (req, res) => {
+  const { email, password } = req.body;
+
+  User.findOne({ email }).exec((err, user) => {
+    if (err)
+      return res
+        .status(400)
+        .json({ error: "Internal Server Error Occured..!" });
+
+    if (user) {
+      // Compare the password
+      if (user.authenticate(password, User.password)) {
+        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
+          expiresIn: "1h",
+        });
+
+        return res
+          .status(200)
+          .json({ token, message: "User Login Successfully..!" });
+      } else {
+        return res.status(400).json({ error: "Invalid Email or Password..!" });
+      }
+    } else {
+      return res.status(400).json({ error: "Something went Wrong..!" });
+    }
+  });
+};
