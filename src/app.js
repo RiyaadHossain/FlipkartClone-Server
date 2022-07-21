@@ -1,5 +1,5 @@
 // External Imports
-const bodyParser = require('body-parser');
+const bodyParser = require("body-parser");
 const express = require("express");
 const dotenv = require("dotenv");
 const app = express();
@@ -7,6 +7,7 @@ const app = express();
 // Internal Imports
 const userRoute = require("./routes/user/userRoute");
 const adminRoute = require("./routes/admin/adminRoute");
+const categoryRoute = require("./routes/category/categoryRoutes");
 
 // Environment Variable
 dotenv.config();
@@ -25,6 +26,7 @@ app.get("/", (req, res) => {
 // Routes
 app.use("/user", userRoute);
 app.use("/admin", adminRoute);
+app.use("/category", categoryRoute);
 
 // Listen to PORT
 app.listen(process.env.PORT, () => {

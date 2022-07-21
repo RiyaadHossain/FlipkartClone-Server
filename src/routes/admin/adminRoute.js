@@ -1,7 +1,7 @@
+const { signUpValidator, isReqValidated, signInValidator } = require('../../validator/validator');
 const { signup, signin } = require('../../controllers/admin/adminContoller');
 const { requireAuth } = require('../../middlewares/requireAuth');
 const express = require('express');
-const { signUpValidator, isReqValidated, signInValidator } = require('../../validator/validator');
 const router = express.Router()
 
 router.post("/signup", signUpValidator, isReqValidated, signup)
