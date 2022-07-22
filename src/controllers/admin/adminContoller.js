@@ -5,19 +5,17 @@ const User = require("../../models/userModel");
 exports.signup = (req, res) => {
   // Check If the email already exist or not
   User.findOne({ email: req.body.email }).exec((err, user) => {
-    if (user) {
+    if (user)
       return res.status(400).json({
         message: "Email Already Registered",
       });
-    }
 
     // Check If the userName already exist or not
     User.findOne({ userName: req.body.userName }).exec((err, user) => {
-      if (user) {
+      if (user)
         return res.status(400).json({
           message: "Username Already Taken",
         });
-      }
 
       const { firstName, lastName, email, userName, password } = req.body;
 
@@ -59,21 +57,26 @@ exports.signin = (req, res) => {
     if (user) {
       // Compare the password
       if (user.authenticate(password, User.password) && user.role === "admin") {
-        const token = jwt.sign({ _id: user._id }, process.env.JWT_SECRET, {
-          expiresIn: "1h",
-        });
-        
-        const { _id, firstName, lastName, email, role, fullName, userName } = user;
+        const token = jwt.sign(
+          { _id: user._id, role: user.role },
+          process.env.JWT_SECRET,
+          {
+            expiresIn: "1h",
+          }
+        );
+
+        const { _id, firstName, lastName, email, role, fullName, userName } =
+          user;
         return res.status(200).json({
           token,
           user: {
             _id,
-            fullName, 
+            fullName,
             firstName,
             lastName,
             userName,
             email,
-            role
+            role,
           },
         });
       } else {
