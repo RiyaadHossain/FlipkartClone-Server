@@ -8,6 +8,7 @@ const app = express();
 const userRoute = require("./routes/userRoute");
 const adminRoute = require("./routes/adminRoute");
 const categoryRoute = require("./routes/categoryRoute");
+const productRoute = require("./routes/productRoute")
 
 // Environment Variable
 dotenv.config();
@@ -27,6 +28,7 @@ app.get("/", (req, res) => {
 app.use("/user", userRoute);
 app.use("/admin", adminRoute);
 app.use("/category", categoryRoute);
+app.use("/product", productRoute);
 
 // Listen to PORT
 app.listen(process.env.PORT, () => {
