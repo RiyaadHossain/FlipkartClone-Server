@@ -5,9 +5,9 @@ const dotenv = require("dotenv");
 const app = express();
 
 // Internal Imports
-const userRoute = require("./routes/user/userRoute");
-const adminRoute = require("./routes/admin/adminRoute");
-const categoryRoute = require("./routes/category/categoryRoutes");
+const userRoute = require("./routes/userRoute");
+const adminRoute = require("./routes/adminRoute");
+const categoryRoute = require("./routes/categoryRoute");
 
 // Environment Variable
 dotenv.config();

@@ -1,4 +1,4 @@
-const Category = require("../../models/categoryModel");
+const Category = require("../models/categoryModel");
 const slugify = require("slugify");
 
 // Function to Get Category

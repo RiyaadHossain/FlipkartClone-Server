@@ -1,5 +1,5 @@
-const { addCategory, getCategory } = require("../../controllers/category/categoryController");
-const { requireAuth, requireAdmin } = require("../../middlewares/middleware");
+const { addCategory, getCategory } = require("../controllers/categoryController");
+const { requireAuth, requireAdmin } = require("../middlewares/middleware");
 const express = require('express');
 const router = express.Router()
 
