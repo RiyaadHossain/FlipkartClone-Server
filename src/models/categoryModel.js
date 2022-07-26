@@ -14,4 +14,4 @@ const categorySchema = new mongoose.Schema({
   parentId: String,
 });
 
-module.exports = new mongoose.model("category", categorySchema);
+module.exports = new mongoose.model("Category", categorySchema);
