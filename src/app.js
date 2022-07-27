@@ -9,6 +9,7 @@ const userRoute = require("./routes/userRoute");
 const adminRoute = require("./routes/adminRoute");
 const categoryRoute = require("./routes/categoryRoute");
 const productRoute = require("./routes/productRoute")
+const cartRoute = require("./routes/cartRoutes")
 
 // Environment Variable
 dotenv.config();

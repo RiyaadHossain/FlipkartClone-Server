@@ -23,8 +23,7 @@ exports.addProduct = (req, res) => {
     slug: slugify(name),
     createdBy: req.user._id,
   });
-  
-  // return res.status(200).json({ productImg, newProduct });
+
   newProduct.save((err, data) => {
     if (err) return res.status(400).json({ error: "Internal Server Error" });
 
