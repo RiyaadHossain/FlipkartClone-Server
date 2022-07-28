@@ -16,10 +16,11 @@ exports.requireAuth = (req, res, next) => {
 exports.requireUser = (req, res, next) => {
   if (req.user.role === "user") {
     next();
+  } else {
+    return res.status(400).json({
+      error: "User Access Denied",
+    });
   }
-  return res.status(400).json({
-    error: "User Access Denied",
-  });
 };
 
 // Verify Admin Access______________________

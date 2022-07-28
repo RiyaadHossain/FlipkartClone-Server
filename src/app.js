@@ -30,6 +30,7 @@ app.use("/user", userRoute);
 app.use("/admin", adminRoute);
 app.use("/category", categoryRoute);
 app.use("/product", productRoute);
+app.use("/cart", cartRoute);
 
 // Listen to PORT
 app.listen(process.env.PORT, () => {
