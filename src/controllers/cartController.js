@@ -12,12 +12,12 @@ exports.addToCart = async (req, res) => {
           .status(400)
           .json({ error: "Internal Server Error Occured..!" });
 
-      // * The Cart is exist_____
+      // #1 The Cart is exist_____
       if (cart) {
         const item = cart.cartItems.find((i) => i.product == cartItems.product);
 
         if (item) {
-          // * Same Product_____
+          // #1.1 Same Product_____
           Cart.findOneAndUpdate(
             { user, "cartItems.product": cartItems.product },
             {
@@ -40,14 +40,14 @@ exports.addToCart = async (req, res) => {
             if (data) {
               if (data)
                 return res.status(200).json({
-                  // message: "Product added to cart Successfully. - Same Product",
                   data,
                 });
             }
           });
         } else {
-          // * Unique Product_____
-          Cart.findOneAndUpdate(
+
+          // #1.2 Unique Product_____
+          Cart.findOneAndUpdate(      /* * Bug * Another user add second unique product. Push this product in other user's cart */
             user,
             {
               $push: { cartItems: cartItems },
@@ -64,14 +64,14 @@ exports.addToCart = async (req, res) => {
             if (data) {
               if (data)
                 return res.status(200).json({
-                  // message:"Product added to cart Successfully. - Unique Product",
                   data,
                 });
             }
           });
         }
       } else {
-        // * The Cart is not exist_____
+
+        // #2 The Cart is not exist_____
         const newCart = Cart({ user, cartItems });
         newCart.save((err, data) => {
           if (err)
@@ -81,7 +81,6 @@ exports.addToCart = async (req, res) => {
 
           if (data)
             return res.status(200).json({
-              // message: "Product added to cart Successfully. - Unique User",
               data,
             });
         });
