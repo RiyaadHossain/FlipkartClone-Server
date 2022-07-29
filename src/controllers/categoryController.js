@@ -30,6 +30,8 @@ exports.addCategory = (req, res) => {
     slug: slugify(name),
   });
 
+  if(req.file) newCategory.categoryImg = `${process.env.APP_API}public/${req.file.filename}`
+
   if (req.body.parentId) newCategory.parentId = req.body.parentId;
 
   newCategory.save((err, category) => {

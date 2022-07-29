@@ -1,21 +1,22 @@
 // External Imports
-const bodyParser = require("body-parser");
 const express = require("express");
 const dotenv = require("dotenv");
 const app = express();
+const path = require('path');
 
 // Internal Imports
 const userRoute = require("./routes/userRoute");
 const adminRoute = require("./routes/adminRoute");
 const categoryRoute = require("./routes/categoryRoute");
-const productRoute = require("./routes/productRoute")
-const cartRoute = require("./routes/cartRoutes")
+const productRoute = require("./routes/productRoute");
+const cartRoute = require("./routes/cartRoutes");
 
 // Environment Variable
 dotenv.config();
 
 // Middlewares
-app.use(bodyParser.json());
+app.use(express.json());
+app.use("/public", express.static(path.join(__dirname, "uploads")));
 
 // Connect to DB
 require("./db/connect");
