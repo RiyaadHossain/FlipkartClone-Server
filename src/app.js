@@ -16,7 +16,7 @@ dotenv.config();
 
 // Middlewares
 app.use(express.json());
-app.use("/public", express.static(path.join(__dirname, "uploads")));
+app.use("/public", express.static(path.join(__dirname, "upload")));
 
 // Connect to DB
 require("./db/connect");
