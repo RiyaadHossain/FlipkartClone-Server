@@ -3,21 +3,21 @@ const User = require("../models/userModel");
 
 // Sign Up Controller_____________________________________
 exports.signup = (req, res) => {
+  const { firstName, lastName, email, userName, password } = req.body;
+
   // Check If the email already exist or not
-  User.findOne({ email: req.body.email }).exec((err, user) => {
+  User.findOne({ email }).exec((err, user) => {
     if (user)
       return res.status(400).json({
         message: "Eamil Already Registered",
       });
 
     // Check If the userName already exist or not
-    User.findOne({ userName: req.body.userName }).exec((err, user) => {
+    User.findOne({ userName }).exec((err, user) => {
       if (user)
         return res.status(400).json({
           message: "Username Already Taken",
         });
-
-      const { firstName, lastName, email, userName, password } = req.body;
 
       // Create New User
       const newUser = new User({
@@ -26,6 +26,7 @@ exports.signup = (req, res) => {
         email,
         userName,
         password,
+        role: "user"
       });
 
       newUser.save((err, data) => {

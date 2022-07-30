@@ -12,12 +12,17 @@ exports.addToCart = async (req, res) => {
           .status(400)
           .json({ error: "Internal Server Error Occured..!" });
 
-      // #1 The Cart is exist_____
+      // #1 The Cart exists_______________
       if (cart) {
         const item = cart.cartItems.find((i) => i.product == cartItems.product);
 
         let find, update;
+        /* To shorten the code, I used two variable named find and update. If the item is already 
+        exist then the value of the find and update will be different from the item is unique.
+        Finally, we find and Update the cart in one place. (Line No. 47) */
+
         if (item) {
+
           // #1.1 Same Product_____
           find = { user, "cartItems.product": cartItems.product };
           update = {
@@ -29,10 +34,11 @@ exports.addToCart = async (req, res) => {
             },
           };
         } else {
+
           // #1.2 Unique Product_____
           find = {
             user,
-          }; /* [Bug:] Another user add second unique product. Push this product in other user's cart */
+          }; /* [Bug:] Another user add second unique product. Push this product in other user's cart--------------------Bug----------------------- */
           update = {
             $push: { cartItems: cartItems },
           };
@@ -52,7 +58,7 @@ exports.addToCart = async (req, res) => {
           }
         });
       } else {
-        // #2 The Cart is not exist_____
+        // #2 The Cart doesn't exist_______________
         const newCart = Cart({ user, cartItems });
         newCart.save((err, data) => {
           if (err)

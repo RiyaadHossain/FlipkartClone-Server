@@ -1,8 +1,8 @@
 // External Imports
 const express = require("express");
 const dotenv = require("dotenv");
-const app = express();
 const path = require('path');
+const app = express();
 
 // Internal Imports
 const userRoute = require("./routes/userRoute");
