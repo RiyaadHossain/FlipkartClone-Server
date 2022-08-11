@@ -64,7 +64,7 @@ exports.signin = (req, res) => {
             expiresIn: "1h",
           }
         );
-
+        res.cookie("token", token, { expiresIn: "1h" })
         return res.status(200).json({
           token,
           user,
@@ -77,3 +77,10 @@ exports.signin = (req, res) => {
     }
   });
 };
+
+
+// Sign Out Controller_____________________________________
+exports.signout = (req, res) => {
+  res.clearCookie("token")
+  return res.status(200).json({ message: "Signout Successfully ... !" })
+}
