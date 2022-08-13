@@ -12,7 +12,7 @@ exports.addProduct = (req, res) => {
       return { img: file.filename };
     });
   }
-
+  
   const newProduct = new Product({
     name,
     price,

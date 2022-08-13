@@ -11,6 +11,7 @@ const adminRoute = require("./routes/adminRoute");
 const categoryRoute = require("./routes/categoryRoute");
 const productRoute = require("./routes/productRoute");
 const cartRoute = require("./routes/cartRoutes");
+const dataRoute = require("./routes/dataRoute");
 
 // Environment Variable
 dotenv.config();
@@ -34,6 +35,7 @@ app.use("/admin", adminRoute);
 app.use("/category", categoryRoute);
 app.use("/product", productRoute);
 app.use("/cart", cartRoute);
+app.use("/data", dataRoute);
 
 // Listen to PORT
 app.listen(process.env.PORT, () => {

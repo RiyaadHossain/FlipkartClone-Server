@@ -1,7 +1,7 @@
 const Category = require("../models/categoryModel");
 const slugify = require("slugify");
 
-// Function to Get Category
+// Function to Get Category in a Structured Way
 const getCategoryList = (categories, parentId = null) => {
   let categoryList = [];
   let category;
@@ -15,6 +15,7 @@ const getCategoryList = (categories, parentId = null) => {
     categoryList.push({
       _id: cat._id,
       name: cat.name,
+      parentId: cat.parentId,
       children: getCategoryList(categories, cat._id)
     })
   }
