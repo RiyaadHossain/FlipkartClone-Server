@@ -12,7 +12,7 @@ exports.addProduct = (req, res) => {
       return { img: file.filename };
     });
   }
-  
+
   const newProduct = new Product({
     name,
     price,
@@ -25,7 +25,8 @@ exports.addProduct = (req, res) => {
   });
 
   newProduct.save((err, data) => {
-    if (err) return res.status(400).json({ error: "Internal Server Error" });
+    
+    if (err) return res.status(400).json({ err });
 
     if (data) return res.status(200).json({ data });
   });

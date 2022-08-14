@@ -26,7 +26,7 @@ exports.initialData = async (req, res) => {
 
     try {
         const category = await Category.find({}).exec()
-        const product = await Product.find({}).exec()
+        const product = await Product.find({}).populate({path: "category", select: "_id name"}).exec()
 
         return res.status(200).json({ category: getCategoryList(category), product })
     } catch (error) {
