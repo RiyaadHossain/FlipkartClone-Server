@@ -13,7 +13,7 @@ exports.signup = (req, res) => {
         message: "Email Already Registered",
       });
 
-    // Check If the userName already exist or not
+    // Check If the userName already exist or not 
     User.findOne({ userName }).exec(async (err, user) => {
       if (user)
         return res.status(400).json({
