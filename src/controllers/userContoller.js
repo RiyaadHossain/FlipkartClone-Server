@@ -1,3 +1,4 @@
+const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel");
 
@@ -13,11 +14,13 @@ exports.signup = (req, res) => {
       });
 
     // Check If the userName already exist or not
-    User.findOne({ userName }).exec((err, user) => {
+    User.findOne({ userName }).exec( async(err, user) => {
       if (user)
         return res.status(400).json({
           message: "Username Already Taken",
         });
+      
+      const hash_password = await bcrypt.hash(password, 10)
 
       // Create New User
       const newUser = new User({
@@ -25,7 +28,7 @@ exports.signup = (req, res) => {
         lastName,
         email,
         userName,
-        password,
+        hash_password,
         role: "user"
       });
 

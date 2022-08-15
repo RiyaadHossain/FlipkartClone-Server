@@ -12,7 +12,7 @@ exports.addProduct = (req, res) => {
       return { img: file.filename };
     });
   }
-
+  console.log(req.files);
   const newProduct = new Product({
     name,
     price,
@@ -35,7 +35,7 @@ exports.addProduct = (req, res) => {
 // To Get Product_________________________
 exports.getProduct = async (req, res) => {
   try {
-    const products = await Product.find();
+    const products = await Product.find().populate("category").exec();
     return res.status(200).json({ products });
   } catch (error) {
     return res.status(400).json({ error });

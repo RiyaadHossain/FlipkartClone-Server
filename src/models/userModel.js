@@ -46,15 +46,11 @@ const userSchema = new mongoose.Schema(
   }
 );
 
-// Hash Password using Bcrypt
-userSchema.virtual("password").set(function (password) {
-  this.hash_password = bcrypt.hashSync(password, 10);
-});
 
 // Instance Method - To compare password
 userSchema.methods = {
-  authenticate: function (password) {
-    return bcrypt.compareSync(password, this.hash_password);
+  authenticate: async function (password) {
+    return await bcrypt.compare(password, this.hash_password);
   },
 };
 
