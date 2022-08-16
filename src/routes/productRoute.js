@@ -3,7 +3,7 @@ const { requireAuth, requireAdmin } = require("../middlewares/middleware");
 const express = require("express");
 const shortid = require("shortid");
 const multer = require("multer");
-const router = express.Router();
+const router = express.Router(); 
 const path = require("path");
 
 const storage = multer.diskStorage({

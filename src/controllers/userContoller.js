@@ -8,7 +8,7 @@ exports.signup = (req, res) => {
 
   // Check If the email already exist or not
   User.findOne({ email }).exec((err, user) => {
-    if (user)
+    if (user) 
       return res.status(400).json({
         message: "Eamil Already Registered",
       });

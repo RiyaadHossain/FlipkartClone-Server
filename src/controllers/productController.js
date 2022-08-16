@@ -5,7 +5,7 @@ const slugify = require("slugify");
 exports.addProduct = (req, res) => {
   const { name, price, quantity, description, category } = req.body;
 
-  let productImg = [];
+  let productImg = []; 
 
   if (req.files.length > 0) {
     productImg = req.files.map((file) => {
