@@ -24,6 +24,6 @@ router.post(
   upload.array("productImg"),
   addProduct
 );
-router.get("/getProduct", getProduct);
+router.get("/getProductBySlug/:slug", getProduct);
 
 module.exports = router;
