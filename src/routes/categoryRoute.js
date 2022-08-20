@@ -1,4 +1,4 @@
-const { addCategory,getCategory } = require("../controllers/categoryController");
+const { addCategory,getCategory, updateCategory } = require("../controllers/categoryController");
 const { requireAuth, requireAdmin } = require("../middlewares/middleware");
 const shortid = require("shortid");
 const express = require("express");
@@ -19,5 +19,6 @@ const upload = multer({ storage });
 
 router.post("/addCategory", requireAuth, requireAdmin, upload.single("categoryImg"), addCategory);
 router.get("/getCategory", getCategory);
+router.patch("/updateCategory", upload.array("categoryImg"), updateCategory);
 
 module.exports = router;
