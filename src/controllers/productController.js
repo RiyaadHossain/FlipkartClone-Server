@@ -6,7 +6,7 @@ const Category = require("../models/categoryModel");
 exports.addProduct = (req, res) => {
   const { name, price, quantity, description, category } = req.body;
 
-  /*   let productImg = [];
+    let productImg = [];
   
     if (req.files.length > 0) {
       productImg = req.files.map((file) => {
@@ -30,8 +30,7 @@ exports.addProduct = (req, res) => {
       if (err) return res.status(400).json({ err });
   
       if (data) return res.status(200).json({ data });
-    }); */
-  res.status(200).json({ body: req.body })
+    });
 };
 
 // To Get Product_________________________

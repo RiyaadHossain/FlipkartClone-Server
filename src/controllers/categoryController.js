@@ -52,11 +52,11 @@ exports.getCategory = (req, res) => {
   });
 };
 
-// Get Category Controller_____________________________________
+// Update Category Controller_____________________________________
 exports.updateCategory = async (req, res) => {
   const { _id, name, parentId, type } = req.body;
 
-   try {
+  try {
     if (name instanceof Array) {
 
       const updatedCategory = []
@@ -87,4 +87,26 @@ exports.updateCategory = async (req, res) => {
     console.log(error)
     if (error) return res.status(500).json({ error })
   }
+}
+
+// Delete Category Controller_____________________________________
+exports.deleteCategory = async (req, res) => {
+  const { ids } = req.body
+  const deletedCategories = []
+
+  try {
+    for (let i = 0; i < ids.length; i++) {
+      const category = await Category.findOneAndDelete({ _id: ids[i] })
+      deletedCategories.push(category)
+    }
+    if (deletedCategories.length === ids.length) {
+      return res.status(200).json({ message: deletedCategories })
+    } else {
+      return res.status(500).json({ message: "Sorry! Something Went wrong" })
+    }
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error })
+  }
+
 }
